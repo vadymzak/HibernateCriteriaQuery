@@ -1,17 +1,25 @@
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-
+@Entity
+@Table(name = "user")
 public class User implements Serializable {
     private static final long serialVersionUID = -5660821718138969527L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private long id;
-
+    @Column(name = "name", length = 11)
     private int age;
 
+    @Column(name="first_name", length = 25)
     private String firstname;
+    @Column(name = "last_name", length = 25)
     private String lastname;
-
-    private Set<Role> roles;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public User() {
 
@@ -49,11 +57,11 @@ public class User implements Serializable {
         this.lastname = lastname;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
