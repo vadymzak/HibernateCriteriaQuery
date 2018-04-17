@@ -1,16 +1,16 @@
+package models;
+
+import models.Role;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
-    private static final long serialVersionUID = -5660821718138969527L;
+public class User extends Model {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private long id;
+    private static final long serialVersionUID = -2367570301140194872L;
+
     @Column(name = "name", length = 11)
     private int age;
 
@@ -26,15 +26,10 @@ public class User implements Serializable {
     private Set<Role> roles = new HashSet<Role>();
 
     public User() {
-
+        super();
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public  User(Long id){
+        super(id);
     }
 
     public int getAge() {

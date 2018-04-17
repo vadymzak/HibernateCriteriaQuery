@@ -1,14 +1,14 @@
+package models;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role extends Model {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private long id;
+    private static final long serialVersionUID = 3913596127777173999L;
+
     @Column(name = "title")
     private String title;
 
@@ -16,15 +16,10 @@ public class Role {
     private Set<User> users = new HashSet<User>();
 
     public Role(){
-
+        super();
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public Role(Long id){
+        super(id);
     }
 
     public String getTitle() {

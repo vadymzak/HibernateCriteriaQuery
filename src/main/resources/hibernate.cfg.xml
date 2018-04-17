@@ -12,8 +12,11 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hbm2ddl.auto">create</property>
 
-        <mapping class="Role"/>
-        <mapping class="User"/>
+        <mapping class="models.Role"/>
+        <mapping class="models.User"/>
+        <mapping class="models.Order"/>
+        <mapping class="models.Product"/>
+        <mapping class="models.ProductCategory"/>
 
 
     </session-factory>
