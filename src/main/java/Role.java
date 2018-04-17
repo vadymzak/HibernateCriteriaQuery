@@ -12,8 +12,8 @@ public class Role {
     @Column(name = "title")
     private String title;
 
-    @OneToOne(mappedBy = "role")
-    private User user;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<User>();
 
     public Role(){
 
@@ -35,11 +35,11 @@ public class Role {
         this.title = title;
     }
 
-    public User getUser() {
-        return user;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

@@ -1,5 +1,6 @@
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Table(name = "user")
@@ -17,9 +18,12 @@ public class User implements Serializable {
     private String firstname;
     @Column(name = "last_name", length = 25)
     private String lastname;
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Role role;
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<Role>();
 
     public User() {
 
@@ -57,11 +61,11 @@ public class User implements Serializable {
         this.lastname = lastname;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
