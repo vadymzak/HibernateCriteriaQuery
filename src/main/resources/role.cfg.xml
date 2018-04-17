@@ -9,11 +9,9 @@
         </id>
         <property name="title" column="title" type="string"/>
 
-        <set name="users" table="user">
-            <key>
-                <column name="role_id" not-null="true"/>
-            </key>
-            <one-to-many class="User"/>
+        <set name="users" table="user_role">
+            <key column="role_id" />
+            <many-to-many column="user_id" class="User"/>
         </set>
     </class>
 

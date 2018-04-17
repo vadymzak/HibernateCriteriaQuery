@@ -11,9 +11,10 @@
         <property name="firstname" column="first_name" type="string"/>
         <property name="lastname" column="last_name" type="string"/>
 
-        <many-to-one name="role" class="Role">
-            <column name="role_id" not-null="true"/>
-        </many-to-one>
+        <set name="roles" table="user_role">
+            <key column="user_id" />
+            <many-to-many column="role_id" class="Role"/>
+        </set>
     </class>
 
 </hibernate-mapping>

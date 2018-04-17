@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 public class Role {
 
@@ -5,7 +6,7 @@ public class Role {
 
     private String title;
 
-    private Set<User> users;
+    private Set<User> users = new HashSet<User>();
 
     public Role(){
 
@@ -34,5 +35,4 @@ public class Role {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
 }
