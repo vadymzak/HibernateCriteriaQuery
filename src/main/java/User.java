@@ -1,5 +1,6 @@
 import java.io.Serializable;
-public class User implements Serializable{
+
+public class User implements Serializable {
     private static final long serialVersionUID = -5660821718138969527L;
 
     private long id;
@@ -11,7 +12,7 @@ public class User implements Serializable{
 
     private Role role;
 
-    public User(){
+    public User() {
 
     }
 
