@@ -9,27 +9,29 @@ import java.util.Set;
 public class ProductCategory extends Model {
     private static final long serialVersionUID = 6875657231396402716L;
     @Column
-    private String title;
+    private String title_category;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_product_category", referencedColumnName = "id")
     private ProductCategory parentProductCategory;
+
     @OneToMany(mappedBy = "productCategory")
     private Set<Product> products = new HashSet<Product>();
 
-    public ProductCategory(){
+    public ProductCategory() {
         super();
     }
-    public ProductCategory(Long id){
+
+    public ProductCategory(Long id) {
         super(id);
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitle_category() {
+        return title_category;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle_category(String title_category) {
+        this.title_category = title_category;
     }
 
     public ProductCategory getParentProductCategory() {
@@ -46,5 +48,9 @@ public class ProductCategory extends Model {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public String toString() {
+        return " " + this.title_category;
     }
 }

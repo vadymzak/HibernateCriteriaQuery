@@ -47,4 +47,8 @@ public class Product extends Model {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+    @Override
+    public String toString(){
+        return "Description: " + this.getDescription() + " --Price: " + this.getPrice() + " --Title: " + this.getTitle();
+    }
 }
