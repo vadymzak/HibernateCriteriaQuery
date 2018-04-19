@@ -1,8 +1,10 @@
 
 import models.Product;
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -15,9 +17,29 @@ public class Main {
         try {
             session.beginTransaction();
 
-            Query queryHQLSelect = session.createQuery("FROM Product AS p INNER JOIN FETCH p.productCategory AS pc");
-            products = queryHQLSelect.list();
+            //Criteria criteria = session.createCriteria(Product.class);
+           // criteria.add(Restrictions.eq("title", "Lenovo A6020"));
+
+            /*SELECT * FROM product WHERE title = "Lenovo A6020"*/
+            //criteria.add(Restrictions.between("price", 10, 1000));
+
+            //criteria.add(Restrictions.like("title", "Lenovo A6020"));
+            /*SELECT * FROM product WHERE title like "%Lenovo A6020%"*/
+
+           /* Object [] mas = {1L,2L,4L,5L};
+            criteria.add(Restrictions.like("title", "Lenovo A6020"));
+            criteria.add(Restrictions.or(Restrictions.not(Restrictions.in("id", mas ))));
+            //SELECT * FROM product  WHERE title like "%Lenovo A6020%" AND id NOT in (1,2,4,5)*/
+
+            //criteria.addOrder(Order.desc("id"));
+
+            Criteria criteria = session.createCriteria(Product.class, "product");
+            criteria.createCriteria("product.productCategory", "productCategory");
+            criteria.add(Restrictions.eq("product.title", "Lenovo A6020"));
+            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            products = criteria.list();
             session.getTransaction().commit();
+
         } catch (Exception e) {
             session.getTransaction().rollback();
             e.printStackTrace();

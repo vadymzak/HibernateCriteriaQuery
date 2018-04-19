@@ -58,6 +58,6 @@ public class Product extends Model {
 
     @Override
     public String toString(){
-        return "ID : "+super.getId()+ " Description: " + this.getDescription() + " --Price: " + getPrice() + " --Title: " + this.getTitle() + " "+this.productCategory.getTitle_category();
+        return "ID : "+super.getId()+ " Description: " + this.getDescription() + " --Price: " + getPrice() + " --Title: " + this.getTitle() + " " + this.productCategory.getTitle_category();
     }
 }
