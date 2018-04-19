@@ -1,7 +1,6 @@
 
 import models.Product;
-import models.ProductCategory;
-import org.hibernate.SQLQuery;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 
@@ -12,21 +11,12 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Session session = sessionFactory.openSession();
-        List<Object[]> products = null;
+        List<Product> products = null;
         try {
             session.beginTransaction();
 
-            SQLQuery queryUpdate = session.createSQLQuery("UPDATE product SET price = :pricce WHERE id = :id");
-            queryUpdate.setParameter("pricce", "750");
-            queryUpdate.setParameter("id", "2");
-            queryUpdate.executeUpdate();
-
-            SQLQuery query = session.createSQLQuery("Select p.*, pc.* FROM product AS p INNER JOIN product_category AS pc ON p.product_category_id  = pc.id");
-
-            query.addEntity("p", Product.class);
-            query.addJoin("pc", "p.productCategory");
-
-            products = query.list();
+            Query queryHQLSelect = session.createQuery("FROM Product AS p INNER JOIN FETCH p.productCategory AS pc");
+            products = queryHQLSelect.list();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -35,9 +25,21 @@ public class Main {
             session.close();
             sessionFactory.close();
         }
-        for (Object[] obj : products) {
-            ProductCategory pc = (ProductCategory) obj[1];
-            System.out.println(obj[0].toString() + " " + pc.getTitle_category());
+        for (Product product : products) {
+            System.out.println(product);
         }
+        /*
+        * SQL: SELECT * FROM product p INNER JOIN product_category pc ON p.product_category_id = pc.id
+        *
+        * HQL: FROM product p INNER JOIN FETCH p.productCategory as pc
+        *
+        * */
+        /*
+         *session.save(product);
+         *session.update(product);
+         *session.delete(product);
+         *session.uniqueResult();
+         * */
+
     }
 }

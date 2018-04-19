@@ -47,8 +47,17 @@ public class Product extends Model {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
     @Override
     public String toString(){
-        return "Description: " + this.getDescription() + " --Price: " + this.getPrice() + " --Title: " + this.getTitle();
+        return "ID : "+super.getId()+ " Description: " + this.getDescription() + " --Price: " + getPrice() + " --Title: " + this.getTitle() + " "+this.productCategory.getTitle_category();
     }
 }
